@@ -1,3 +1,12 @@
+resource "aws_default_route_table" "default" {
+  default_route_table_id = "${aws_vpc.vpc.default_route_table_id}"
+
+  tags {
+    Name = "${var.name}-default"
+  }
+}
+
+
 resource "aws_route_table" "private" {
   count = 3
   vpc_id = "${aws_vpc.vpc.id}"
