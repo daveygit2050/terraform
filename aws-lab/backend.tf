@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "dave-general"
-    key    = "terraform/test"
+    bucket = "goldsquare-state"
+    key = "terraform/aws-lab"
     region = "eu-west-1"
   }
 }
