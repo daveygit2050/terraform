@@ -6,6 +6,11 @@ variable "region" {
   default = "eu-west-1"
 }
 
+variable "access-cidr" {
+  default = "0.0.0.0/0"
+  description = "Change this to allow traffic only from a specific source"
+}
+
 variable "az-suffixes" {
   type = "list"
   default = ["a", "b", "c"]
