@@ -10,6 +10,7 @@ resource "aws_subnet" "public" {
   availability_zone = "${var.region}${element(var.az-suffixes, count.index)}"
   cidr_block = "${element(var.public-cidrs, count.index)}"
   count = "${length(var.az-suffixes)}"
+  map_public_ip_on_launch = true
   vpc_id = "${aws_vpc.vpc.id}"
 
   tags {
