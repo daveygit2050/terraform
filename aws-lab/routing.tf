@@ -8,7 +8,7 @@ resource "aws_default_route_table" "default" {
 
 
 resource "aws_route_table" "private" {
-  count = 3
+  count = "${length(var.az-suffixes)}"
   vpc_id = "${aws_vpc.vpc.id}"
 
   route {
@@ -35,13 +35,13 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "private" {
-  count = 3
+  count = "${length(var.az-suffixes)}"
   subnet_id = "${aws_subnet.private.*.id[count.index]}"
   route_table_id = "${aws_route_table.private.*.id[count.index]}"
 }
 
 resource "aws_route_table_association" "public" {
-  count = 3
+  count = "${length(var.az-suffixes)}"
   subnet_id = "${aws_subnet.public.*.id[count.index]}"
   route_table_id = "${aws_route_table.public.id}"
 }

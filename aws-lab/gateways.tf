@@ -7,7 +7,7 @@ resource "aws_internet_gateway" "ig" {
 }
 
 resource "aws_eip" "ng" {
-  count = 3
+  count = "${length(var.az-suffixes)}"
   vpc = true
 
   tags {
@@ -17,7 +17,7 @@ resource "aws_eip" "ng" {
 
 resource "aws_nat_gateway" "ng" {
   allocation_id = "${aws_eip.ng.*.id[count.index]}"
-  count = 3
+  count = "${length(var.az-suffixes)}"
   subnet_id = "${aws_subnet.public.*.id[count.index]}"
 
   tags {
