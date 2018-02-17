@@ -6,7 +6,7 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-resource "aws_subnet" "public-subnets" {
+resource "aws_subnet" "public" {
   availability_zone = "${var.region}${element(var.az-suffixes, count.index)}"
   cidr_block = "${element(var.public-cidrs, count.index)}"
   count = 3
@@ -18,7 +18,7 @@ resource "aws_subnet" "public-subnets" {
   }
 }
 
-resource "aws_subnet" "private-subnets" {
+resource "aws_subnet" "private" {
   availability_zone = "${var.region}${element(var.az-suffixes, count.index)}"
   cidr_block = "${element(var.private-cidrs, count.index)}"
   count = 3
